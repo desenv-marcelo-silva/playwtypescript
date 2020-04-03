@@ -1,0 +1,11 @@
+features/.vscode
+
+fetchjson/node_modules/*
+fetchjson/.vscode/*
+
+maps/node_modules/*
+maps/.cache/*
+maps/dist/*
+
+sort/node_modules/*
+sort/build/*
