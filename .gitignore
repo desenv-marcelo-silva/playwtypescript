@@ -9,3 +9,5 @@ maps/dist/*
 
 sort/node_modules/*
 sort/build/*
+
+stats/node_modules
