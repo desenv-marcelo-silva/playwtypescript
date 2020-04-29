@@ -4,24 +4,6 @@ import { MatchResult } from './MatchResult';
 const reader = new CsvFileReader('football.csv');
 reader.read();
 
-console.log(reader.data);
-/*
- * Javascript way
-
-const homeWin = 'H';
-const awayWin = 'A';
-
-const MatchResult = {
-  HomeWin: 'H',
-  AwayWin: 'A',
-  Draw: 'D',
-};
-*/
-
-/*
- * Typescript way
- */
-
 let manUnitedWins = 0;
 
 for (let match of reader.data) {
