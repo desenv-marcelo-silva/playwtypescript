@@ -11,3 +11,7 @@ sort/node_modules/*
 sort/build/*
 
 stats/node_modules
+
+web/.cache
+web/dist
+web/node_modules
