@@ -22,4 +22,6 @@ class ArrayOfAnything<T> {
   }
 }
 
-new ArrayOfAnything<string>(['a', 'b', 'c']);
+//new ArrayOfAnything<string>(['a', 'b', 'c']);
+const arrS = new ArrayOfAnything(['a', 'b', 'c']);
+const arrN = new ArrayOfAnything([1, 2, 3]);
