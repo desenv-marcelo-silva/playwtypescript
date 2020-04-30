@@ -1,10 +1,7 @@
 import fs from 'fs';
-import { MatchResult } from './MatchResult';
 
-type MatchData = [Date, string, string, number, number, MatchResult, string];
-
-export abstract class CsvFileReader {
-  data: MatchData[] = [];
+export class CsvFileReader {
+  data: string[][] = [];
 
   constructor(public fileName: string) {}
 
@@ -16,9 +13,6 @@ export abstract class CsvFileReader {
       .split('\n')
       .map((row: string): string[] => {
         return row.split(',');
-      })
-      .map(this.mapRow);
+      });
   }
-
-  abstract mapRow(row: string[]): MatchData;
 }
