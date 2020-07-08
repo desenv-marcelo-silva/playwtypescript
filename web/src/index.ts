@@ -2,8 +2,10 @@ import { User } from './models/User';
 
 const user = new User({ name: 'Kiara', age: 6 });
 
-user.events.on('change', () => {
-  console.log('change triggered');
+console.log(user.get('name'));
+
+user.on('change', () => {
+  console.log('User was changed.');
 });
 
-user.events.trigger('change');
+user.trigger('change');
