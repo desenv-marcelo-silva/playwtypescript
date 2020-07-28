@@ -16,3 +16,5 @@ web/.cache
 web/dist
 web/node_modules
 .DS_Store
+
+server/node_modules
