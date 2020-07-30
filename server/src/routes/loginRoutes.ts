@@ -29,7 +29,34 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
     req.session = { loggedIn: true };
     res.redirect('/');
   } else {
-    res.send('<h1>Invald e-mail or password.');
+    res.send('<h1>Invald e-mail or password.</h1>');
+  }
+});
+
+router.get('/logout', (req: Request, res: Response) => {
+  req.session = null;
+  res.redirect('/');
+});
+
+router.get('/', (req: Request, res: Response) => {
+  if (req.session && req.session.loggedIn) {
+    res.send(`
+      <div>
+        <div>
+          <p>You are logged in</p>
+          <a href="/logout">Logout</a>
+        </div>
+      </div>
+    `);
+  } else {
+    res.send(`
+    <div>
+      <div>
+        <p>You are not logged in</p>
+        <a href="/login">Login</a>
+      </div>
+    </div>
+  `);
   }
 });
 
