@@ -18,5 +18,5 @@ web/node_modules
 .DS_Store
 
 server/node_modules
-server/build
+server/build/**
 features/node_modules
