@@ -16,20 +16,26 @@ function requireAuth(req: Request, res: Response, next: NextFunction) {
 
 const router = Router();
 
-router.get('/login', (req: Request, res: Response) => {
-  res.send(`
-    <form method="POST">
+router.get('/', (req: Request, res: Response) => {
+  if (req.session && req.session.loggedIn) {
+    res.send(`
       <div>
-        <label>Email</label>
-        <input name="email" />
+        <div>
+          <p>You are logged in</p>
+          <a href="/logout">Logout</a>
+        </div>
       </div>
+    `);
+  } else {
+    res.send(`
+    <div>
       <div>
-        <label>Password</label>
-        <input name="password" type="password" />
+        <p>You are not logged in</p>
+        <a href="/auth/login">Login</a>
       </div>
-      <button>Submit</button>
-    </form>
+    </div>
   `);
+  }
 });
 
 router.post('/login', (req: RequestWithBody, res: Response) => {
@@ -46,28 +52,6 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
 router.get('/logout', (req: Request, res: Response) => {
   req.session = null;
   res.redirect('/');
-});
-
-router.get('/', (req: Request, res: Response) => {
-  if (req.session && req.session.loggedIn) {
-    res.send(`
-      <div>
-        <div>
-          <p>You are logged in</p>
-          <a href="/logout">Logout</a>
-        </div>
-      </div>
-    `);
-  } else {
-    res.send(`
-    <div>
-      <div>
-        <p>You are not logged in</p>
-        <a href="/login">Login</a>
-      </div>
-    </div>
-  `);
-  }
 });
 
 router.get('/protected', requireAuth, (req: Request, res: Response) => {
