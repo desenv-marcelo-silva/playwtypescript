@@ -5,26 +5,26 @@ class Boat {
     return `This boat color is ${this.color}`;
   }
 
-  @testDecorator
+  @logError
   pilot(): void {
+    throw new Error();
     console.log('swish');
   }
 }
 
-function testDecorator(target: any, key: string): void {
+function logError(target: any, key: string, desc: PropertyDescriptor): void {
   console.log('Target: ', target);
   console.log('Key: ', key);
+  console.log('desc', desc);
+  const method = desc.value;
+
+  desc.value = function () {
+    try {
+      method();
+    } catch (error) {
+      console.log('oops, boat was sunk');
+    }
+  };
 }
 
-/*
- *
- * Como o TS traduz isso para JS - Decorator puro, fica da forma abaixo
- *
- */
-// var __decorate = function (decorators, target, key, desc) {
-//   var desc = Object.getOwnPropertyDescriptor(target, key);
-
-//   for (var decorator of decorators) {
-//     decorator(target, key, desc);
-//   }
-// };
+new Boat().pilot();
