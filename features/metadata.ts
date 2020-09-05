@@ -1,24 +1,26 @@
 import 'reflect-metadata';
 
-@printMetadata
+@controller
 class Plane {
   color: string = 'red';
 
-  @markFunction('Hello there')
+  @get('Hello there')
   fly(): void {
     console.log('flying ing ing ing');
   }
 }
 
-function markFunction(secretInfo: string) {
+function get(path: string) {
   return function (target: Plane, key: string) {
-    Reflect.defineMetadata('secret', secretInfo, target, key);
+    Reflect.defineMetadata('path', path, target, key);
   };
 }
 
-function printMetadata(target: typeof Plane) {
+function controller(target: typeof Plane) {
   for (let key in target.prototype) {
-    const secret = Reflect.getMetadata('secret', target.prototype, key);
-    console.log(secret);
+    const path = Reflect.getMetadata('path', target.prototype, key);
+    const middleware = Reflect.getMetadata('middleware', target.prototype, key);
+
+    router.get(path, middleware, target.prototype[key]);
   }
 }
