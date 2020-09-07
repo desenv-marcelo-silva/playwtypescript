@@ -38,17 +38,6 @@ router.get('/', (req: Request, res: Response) => {
   }
 });
 
-router.post('/login', (req: RequestWithBody, res: Response) => {
-  const { email, password } = req.body;
-
-  if (email && password && email === 'hi@hi.com' && password === '123') {
-    req.session = { loggedIn: true };
-    res.redirect('/');
-  } else {
-    res.send('<h1>Invald e-mail or password.</h1>');
-  }
-});
-
 router.get('/logout', (req: Request, res: Response) => {
   req.session = null;
   res.redirect('/');
