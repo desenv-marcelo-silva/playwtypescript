@@ -32,4 +32,10 @@ class LoginController {
       res.send('<h1>Invald e-mail or password.</h1>');
     }
   }
+
+  @get('/logout')
+  getLogout(req: Request, res: Response) {
+    req.session = null;
+    res.redirect('/');
+  }
 }

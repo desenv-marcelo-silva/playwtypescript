@@ -38,11 +38,6 @@ router.get('/', (req: Request, res: Response) => {
   }
 });
 
-router.get('/logout', (req: Request, res: Response) => {
-  req.session = null;
-  res.redirect('/');
-});
-
 router.get('/protected', requireAuth, (req: Request, res: Response) => {
   res.send('<h1>Yeap!! You are in protected area here!!</h1>');
 });
